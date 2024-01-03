@@ -10,3 +10,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+services:
+  order-service: "http://localhost:8082"

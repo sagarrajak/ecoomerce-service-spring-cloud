@@ -9,6 +9,7 @@ import com.fancystore.orderservice.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +20,10 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private InventoryService inventoryService;
+
+
     @Transactional
     public Order placeOrder(OrderRequest orderRequest) {
         Order order = new Order();
@@ -28,6 +33,7 @@ public class OrderService {
                 .map(orderLineItemDto -> mapToDto(orderLineItemDto, order))
                 .toList();
         order.setOrderLineItems(list);
+        // Call inventory service and place order if product is in inventory
         return orderRepository.save(order);
     }
 
