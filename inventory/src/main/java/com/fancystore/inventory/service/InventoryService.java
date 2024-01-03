@@ -24,7 +24,12 @@ public class InventoryService {
         HashMap<String, Boolean> m = new HashMap<String, Boolean>();
         skuCode.forEach(code -> {
             Optional<Inventory> bySkuCode = this.inventoryRepository.findBySkuCode(code);
-            m.put(code, bySkuCode.isPresent());
+            if (bySkuCode.isPresent()) {
+                m.put(code, bySkuCode.get().getQuantity() > 0);
+            } else  {
+                m.put(code, false);
+            }
+
         });
         return m;
     }

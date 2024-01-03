@@ -23,7 +23,7 @@ public class InventoryController {
         return this.inventoryService.isInStock(skuCode);
     }
 
-    @GetMapping
+    @GetMapping("/items")
     @ResponseStatus(HttpStatus.OK)
     public HashMap<String, Boolean> isItemsIsInStockStock(
         @RequestParam("sku-code") Optional<List<String>> skuCode

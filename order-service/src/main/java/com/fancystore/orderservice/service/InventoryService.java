@@ -21,19 +21,19 @@ public class InventoryService {
 
     public boolean isInventoryAvailable(String skuCode) {
         return Boolean.TRUE.equals(webClient.get()
-                .uri(inventoryService)
+                .uri("/api/inventory")
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block());
     }
 
     public HashMap isInventoryAvailable(List<String> skuCodes) {
+        String[] skuCodeArray = skuCodes.toArray(new String[skuCodes.size()]);
         return webClient.get()
                 .uri(
                         builder -> builder
-                                .path(inventoryService)
-                                .path("items")
-                                .queryParam("sku-code", Arrays.toString(skuCodes.toArray()))
+                                .path("/api/inventory/items")
+                                .queryParam("sku-code", String.join(",", skuCodeArray))
                                 .build()
                 )
                 .retrieve()

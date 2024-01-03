@@ -14,5 +14,9 @@
   {
     "skuCode": 4,
     "quantity": 10
+  },
+  {
+    "skuCode": 5,
+    "quantity": 0
   }
 ]

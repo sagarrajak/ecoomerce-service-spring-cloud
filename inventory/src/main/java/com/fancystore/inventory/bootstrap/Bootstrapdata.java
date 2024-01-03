@@ -26,7 +26,8 @@ public class Bootstrapdata implements CommandLineRunner {
         try {
             List<Inventory> inventories = mapper.readValue(inputStream, typeReference);
             System.out.println("Inventories : "+inventories);
-            inventoryRepository.saveAll(inventories);
+            List<Inventory> itemsNotPresent = inventories.stream().filter(e -> !inventoryRepository.findBySkuCode(e.getSkuCode()).isPresent()).toList();
+            inventoryRepository.saveAll(itemsNotPresent);
         }
         catch (IOException err) {
             System.out.println("Unable to read file!");
