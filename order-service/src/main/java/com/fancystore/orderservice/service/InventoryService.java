@@ -12,8 +12,6 @@ import java.util.List;
 @Service
 public class InventoryService {
 
-    @Value("${services.order-service}")
-    private String inventoryService;
 
     @Autowired
     private WebClient webClient;
