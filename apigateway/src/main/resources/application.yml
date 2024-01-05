@@ -1,12 +1,7 @@
 server:
   port: 8082
 
-spring:
-  cloud:
-    compatibility-verifier:
-      enabled: false
-  application:
-    name: api-gateway
+
 
 eureka:
   client:
@@ -17,21 +12,27 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-cloud:
-  gateway:
-    routes:
-      - id: product_route
-        uri: lb://product-service
-        predicates:
-          - Path=/api/product/**
-      - id: inventory_route
-        uri: lb://inventory-service
-        predicates:
-          - Path=/api/inventory/**
-      - id: order_route
-        uri: lb://order-service
-        predicates:
-          - Path=/api/order/**
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    gateway:
+      routes:
+        - id: product_route
+          uri: lb://product-service
+          predicates:
+            - Path=/api/product
+        - id: inventory_route
+          uri: lb://inventory-service
+          predicates:
+            - Path=/api/inventory/**
+        - id: order_route
+          uri: lb://order-service
+          predicates:
+            - Path=/api/order/**
+
+  application:
+    name: api-gateway
 
 logging:
   level:
