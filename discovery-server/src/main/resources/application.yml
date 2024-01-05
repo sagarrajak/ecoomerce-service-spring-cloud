@@ -10,6 +10,9 @@
 #    hibernate:
 #      ddl-auto: update
 #    show-sql: true
+spring:
+  application:
+    name: discovery-service
 
 eureka:
   instance:

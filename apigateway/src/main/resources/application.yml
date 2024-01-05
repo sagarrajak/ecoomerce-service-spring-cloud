@@ -1,0 +1,44 @@
+server:
+  port: 8082
+
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+cloud:
+  gateway:
+    routes:
+      - id: product_route
+        uri: lb://product-service
+        predicates:
+          - Path=/api/product/**
+      - id: inventory_route
+        uri: lb://inventory-service
+        predicates:
+          - Path=/api/inventory/**
+      - id: order_route
+        uri: lb://order-service
+        predicates:
+          - Path=/api/order/**
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
+
+
