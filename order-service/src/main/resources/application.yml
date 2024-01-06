@@ -23,7 +23,7 @@ eureka:
 
 management:
   health:
-    circuitbreaker:
+    circuitbreakers:
       enabled: true
   endpoints:
     web:
@@ -45,8 +45,13 @@ resilience4j:
         registerHealthIndicator: true
         event-consumer-buffer-size: 10
         slidingWindowType: COUNT_BASED
-        slidingWindowSize: 5
+        slidingWindowSize: 10
         failureRateThreshold: 50
         waitDurationInOpenState: 5s
         permittedNumberOfCallsInHalfOpenState: 3
         automaticTransitionFromOpenToHalfOpenEnabled: true
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 100
+        minimumNumberOfCalls: 10
+        # timeout
+        timeout-duration: 3s
