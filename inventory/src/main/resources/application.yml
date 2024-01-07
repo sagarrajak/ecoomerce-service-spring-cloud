@@ -6,6 +6,9 @@ spring:
     password: sagar
     url: jdbc:mysql://localhost:3306/inventory
     username: root
+  zipkin:
+    base-url: http://localhost:9411
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,6 +24,7 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-
+management.tracing.sampling:
+  probability: 1.0
 
 

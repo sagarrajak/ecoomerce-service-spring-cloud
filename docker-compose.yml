@@ -25,7 +25,20 @@ services:
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
+      - DB_VENDOR=MYSQL
+      - DB_ADDR=mysql
+      - DB_DATABASE=testdb
+      - DB_USER=admin
+      - DB_PASSWORD=sagar
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "connectTimeout=30000"
+    depends_on:
+      - mysql
     command: start-dev
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
 volumes:
   mongo-data:  # Define the named volume1
   mysql-data:

@@ -19,9 +19,7 @@
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<spring-cloud.version>2023.0.0</spring-cloud.version>
-
-
+		<spring-cloud.version>2021.0.0</spring-cloud.version>
 	</properties>
     <packaging>pom</packaging>
 	<modules>
@@ -32,6 +30,20 @@
         <module>discovery-server</module>
 		<module>apigateway</module>
 	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-observation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-tracing-bridge-brave</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.zipkin.reporter2</groupId>
+			<artifactId>zipkin-reporter-brave</artifactId>
+		</dependency>
+	</dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -40,6 +52,16 @@
 				<version>2023.0.0</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-sleuth</artifactId>
+				<version>3.1.10</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-sleuth-zipkin</artifactId>
+				<version>3.1.10</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

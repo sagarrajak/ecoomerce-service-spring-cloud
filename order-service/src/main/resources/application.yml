@@ -6,6 +6,13 @@ spring:
     password: sagar
     url: jdbc:mysql://localhost:3306/orderservice
     username: root
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+    async:
+      enabled: false
   jpa:
     hibernate:
       ddl-auto: update
@@ -32,7 +39,8 @@ management:
   endpoint:
     health:
         show-details: always
-
+  tracing.sampling:
+    probability: 1.0
 
 
 services:
