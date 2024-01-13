@@ -6,6 +6,10 @@ spring:
       name: product-service
   zipkin:
     base-url: http://localhost:9411
+    enabled: true
+    locator:
+      discovery:
+        enabled: true
 eureka:
   client:
     serviceUrl:
@@ -15,8 +19,7 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-management.tracing.sampling:
-  probability: 1.0
+management.tracing.sampling.probability: 1.0
 
 server:
   port: 0

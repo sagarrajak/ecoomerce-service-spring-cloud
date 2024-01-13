@@ -15,13 +15,16 @@ spring:
     name: discovery-service
   zipkin:
     base-url: http://localhost:9411
+    enabled: true
+    locator:
+      discovery:
+        enabled: true
 
-management.tracing.sampling:
-  probability: 1.0
+management.tracing.sampling.probability: 1.0
 
 eureka:
   instance:
-    hostname:localhost
+    hostname: localhost
   client:
     register-with-eureka: false
     fetch-registry: false

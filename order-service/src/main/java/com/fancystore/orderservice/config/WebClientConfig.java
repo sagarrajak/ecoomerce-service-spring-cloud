@@ -26,12 +26,13 @@ public class WebClientConfig {
     }
 
     @Bean
-    public WebClient webClient() {
+    public WebClient webClient(WebClient.Builder builder) {
         HttpClient httpClient = HttpClient.create()
                 .wiretap(this.getClass().getCanonicalName(), LogLevel.DEBUG, AdvancedByteBufFormat.SIMPLE);
         ClientHttpConnector conn = new ReactorClientHttpConnector(httpClient);
-        return this.webClientBuilder().clientConnector(conn).baseUrl(inventoryService).build();
+        return builder.clientConnector(conn).baseUrl(inventoryService).build();
     }
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.fancystore.orderservice.service;
 
+import io.micrometer.tracing.annotation.NewSpan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class InventoryService {
                 .block());
     }
 
+    @NewSpan(name = "inventory-service")
     public HashMap isInventoryAvailable(List<String> skuCodes) {
         String[] skuCodeArray = skuCodes.toArray(new String[skuCodes.size()]);
         return webClient.get()

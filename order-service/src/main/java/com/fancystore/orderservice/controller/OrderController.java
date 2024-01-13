@@ -21,8 +21,8 @@ public class OrderController {
     private OrderService orderService;
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CircuitBreaker(name = "inventory", fallbackMethod = "fallbackMethod")
-    @TimeLimiter(name = "inventory")
+    //@CircuitBreaker(name = "inventory", fallbackMethod = "fallbackMethod")
+//    @TimeLimiter(name = "inventory")
     public CompletableFuture<OrderResponse<Order>> placeOrder(@RequestBody OrderRequest orderRequest) throws CustomIllegalArgumentException {
         Order order = this.orderService.placeOrder(orderRequest);
         return CompletableFuture.supplyAsync(() -> new OrderResponse<>(order, "Order successfully!"));
