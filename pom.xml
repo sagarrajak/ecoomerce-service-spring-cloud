@@ -29,7 +29,8 @@
 		<module>discovery-server</module>
         <module>discovery-server</module>
 		<module>apigateway</module>
-	</modules>
+        <module>notification-service</module>
+    </modules>
 	<dependencies>
 		<dependency>
 			<groupId>io.micrometer</groupId>

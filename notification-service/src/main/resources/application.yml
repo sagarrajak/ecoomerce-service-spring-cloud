@@ -1,0 +1,34 @@
+server:
+  port: 0
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    locator:
+      discovery:
+        enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
+    async:
+      enabled: false
+  application:
+    name: notification-service
+
+  kafka:
+    bootstrap-servers: http://localhost:29092
+    template:
+      default-topic: notificationTopic
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties.spring.json.type.mapping: event:com.fancystore.OrderPlacesEvent
+      group-id: notificationId
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

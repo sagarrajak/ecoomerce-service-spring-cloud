@@ -23,6 +23,14 @@ spring:
     show-sql: true
   application:
     name: order-service
+  kafka:
+    bootstrap-servers: http://localhost:29092
+    template:
+      default-topic: notificationTopic
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties.spring.json.type.mapping: event:com.fancystore.orderservice.event.OrderPlaceEvent
 eureka:
   client:
     serviceUrl:
